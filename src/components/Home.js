@@ -1,7 +1,7 @@
 import MY_API_KEY from "../config"
 // import NewsCard from "./NewsCard";
 import React, { useState, useEffect } from 'react';
-// import Test from "./Test";
+import Test from "./Test";
 
 
 const Home = () => {
@@ -36,7 +36,7 @@ const Home = () => {
 
   return (
     <div id="images">
-      {/* <Test /> */}
+      <Test />
       <button onClick={() => setThema('science')} >Science</button>
       {newsData.map((data, i) =>
         <div key={i}>

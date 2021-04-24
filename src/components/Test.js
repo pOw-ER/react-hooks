@@ -1,44 +1,43 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import NewsCard from './NewsCard';
 
 
-class Test extends Component {
-  state = {
-    count: 0,
-    todos: [],
-  }
+const Test = () => {
+  const [count, setCount] = useState(0)
+  const [todos, setTodos] = useState([])
 
-  // increment = () => {
-  //   this.setState({ count: this.state.count + 1 })
-  // }
-  getTodos = () => {
+  useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/todos')
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        this.setState({ todos: data })
+        setTodos(data)
       })
       .catch(err => console.log(err))
-  }
-  render() {
-    return (
-      <div>
-        {/* <button onClick={() => this.increment()}>increment</button> */}
-        <button onClick={this.getTodos}>Todos</button>
+  }, [])
 
-        {this.state.todos === [] ? '' : this.state.todos.map((todo, i) => {
-          return <NewsCard
-            key={i}
-            title={todo.title}
-            user_id={todo.userId}
-            completed={todo.completed}
-          />
-        })}
+  useEffect(() => {
+    setCount(count)
+  }, [count])
 
-      </div>
 
-    );
-  }
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)}>increment</button>
+      <p>{count}</p>
+      {todos === [] ? '' : todos.map((todo, i) => {
+        return <NewsCard
+          key={i}
+          title={todo.title}
+          user_id={todo.userId}
+          completed={todo.completed}
+        />
+      })}
+
+    </div>
+
+  );
 }
+
 
 export default Test;
